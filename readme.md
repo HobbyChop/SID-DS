@@ -1,7 +1,7 @@
 # SID-DS Owner's Manual
 
 **C64 SID synthesizer & groovebox for the Nintendo DS**
-Firmware v1.0.5B (beta), July 2026
+Firmware v1.0.6B (beta), July 2026
 
 ---
 
@@ -44,7 +44,7 @@ filter, and the 6581's famous distortion.
 
 | File | Contents |
 |---|---|
-| `sid-ds-1.0.5b.nds` | The firmware, **empty** pattern bank (start fresh) |
+| `sid-ds-1.0.6b.nds` | The firmware, **empty** pattern bank (start fresh) |
 
 ---
 
@@ -58,8 +58,8 @@ filter, and the 6581's famous distortion.
 3. **Tweak the sound:** open **FLT** and drag on the XY pad. X is cutoff,
    Y is resonance. Try the other pages; every control is live.
 4. **Make a beat:** open **DRM**, tap cells into the four lanes, press PLAY.
-5. **Save your work:** open **SAVE**, tap a slot, tap SAVE. (The working state
-   also autosaves to SD a few seconds after you stop editing.)
+5. **Save your work:** open **SAVE**, tap a slot, tap SAVE. Only saved slots
+   survive power-off; **NEW** on the same page starts a fresh track any time.
 
 ---
 
@@ -366,13 +366,15 @@ octave.
 - **16 slots.** Tap to select; `SAVE` / `LOAD` (confirmed); `NAME` opens the
   naming keyboard; `CLR` clears the slot (confirmed).
 - **CPY / PST:** pattern clipboard (see chapter 7).
-- **Autosave:** the working state persists to SD a few seconds after your
-  last edit and returns at boot. Presets, slot names and MIDI settings live
-  in their own files:
+- **NEW** (confirmed): a **fresh track without rebooting** -- restores the
+  factory boot state: default patch and timbres, empty pattern bank and song
+  chain, factory kit, BPM 128. Anything not saved to a slot is gone, so save
+  first.
+- The working state lives in RAM only: **what you don't SAVE to a slot is
+  lost at power-off**. Presets, slot names and MIDI settings persist on SD:
 
 | File | Contents |
 |---|---|
-| `/sid-ds.dat` | working state (autosave) |
 | `/sid-ds-pre.dat` | the 16 preset slots |
 | `/sid-ds-nm.dat` | slot names |
 | `/sid-ds-cfg.dat` | global MIDI settings |
@@ -475,7 +477,7 @@ the SYNC ratio). **CLOCK OUT** makes SID-DS the master.
 | Mixer | SID master + 3 voice levels + drum master + 4 lane trims |
 | FX | Chorus + delay (post-mix) |
 | MIDI | 3-part multitimbral in + ch10 drums, clock in/out, CC map, THRU |
-| Storage | 16 full-state preset slots + autosave (SD via flashcart) |
+| Storage | 16 full-state preset slots (SD via flashcart); NEW = factory-fresh track |
 | Tempo | 40-240 BPM, swing |
 
 ---
