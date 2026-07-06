@@ -45,25 +45,22 @@ filter, and the 6581's famous distortion.
 
 | File | Contents |
 |---|---|
-| `sid-ds-version.nds`
+| `sid-ds-1.0.1b.nds` | Full firmware **with** the built-in demo song |
+| `sid-ds-1.0.1b-clean.nds` | Identical firmware, **empty** pattern bank |
 
 ---
 
 ## 2. Quick start
 
-1. Copy the `.nds` ROM to your flashcart (or open it in an emulator such as
-   melonDS) and boot it. Enjoy the C64 boot sequence.
-2. **Hear the demo:** press **START** and the arrangement plays from the top.
-   Watch the top screen: filter curve, voice activity, and the 3-track step
-   strip all animate live. Press **START** again to stop.
-3. **Play the keys:** the piano strip at the bottom of the touch screen is
+1. Copy the `.nds` ROM to your flashcart (on real hardware) and boot it. 
+2. **Play the keys:** the piano strip at the bottom of the touch screen is
    always live. The two thin sliders at its left are the **pitch wheel**
    (springs back to centre) and the **mod wheel** (vibrato depth); `+`/`-`
    shift the octave.
-4. **Tweak the sound:** open **FLT** and drag on the XY pad. X is cutoff,
+3. **Tweak the sound:** open **FLT** and drag on the XY pad. X is cutoff,
    Y is resonance. Try the other pages; every control is live.
-5. **Make a beat:** open **DRM**, tap cells into the four lanes, press PLAY.
-6. **Save your work:** open **SAVE**, tap a slot, tap SAVE. (The working state
+4. **Make a beat:** open **DRM**, tap cells into the four lanes, press PLAY.
+5. **Save your work:** open **SAVE**, tap a slot, tap SAVE. (The working state
    also autosaves to SD a few seconds after you stop editing.)
 
 ---
