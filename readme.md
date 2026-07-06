@@ -22,7 +22,7 @@ Firmware v1.0.1B (beta), July 2026
 13. [Saving & presets (SAVE)](#13-saving--presets-save)
 14. [Settings & MIDI (SET)](#14-settings--midi-set)
 15. [MIDI implementation](#15-midi-implementation)
-16. [The demo song: "LOW RES"](#16-the-demo-song-low-res)
+16. [The demo songs](#16-the-demo-songs)
 17. [Specifications](#17-specifications)
 18. [Troubleshooting](#18-troubleshooting)
 
@@ -45,7 +45,7 @@ filter, and the 6581's famous distortion.
 
 | File | Contents |
 |---|---|
-| `sid-ds-1.0.1b.nds` | Identical firmware, **empty** pattern bank |
+| `sid-ds-1.0.1b.nds` | The firmware, **empty** pattern bank (start fresh) |
 
 ---
 
@@ -290,7 +290,12 @@ A **64-slot chain** (4 pages of 16) arranges patterns into a song.
 - **Editor row** for the selected slot:
   - `-P#+` direct pattern pick.
   - `-X#+` repeat count x1 to x8.
-  - **SYN / DRM** per-slot lane mutes (e.g. drumless intro, synthless break).
+  - **S / D** per-slot lane mutes (e.g. drumless intro, synthless break).
+  - `-BPM+` **per-slot tempo**: taps step by 5 BPM (40-240). Shown in yellow
+    when set; stepping below 40 turns it off (the slot follows the base
+    tempo). A slot with an override wears a small yellow tick in the grid.
+    While that slot plays, the whole transport (and MIDI clock out) runs at
+    its tempo; the base BPM on the SEQ page is untouched.
   - `-#/4+` chain page.
 - **Transport:** `PLAY`, **`LOOP`**, `CLR`.
   - **LOOP lit:** the arrangement wraps forever.
@@ -391,25 +396,41 @@ on, held notes on the selected track's channel feed the arp.
 
 | CC | Parameter | | CC | Parameter |
 |---|---|---|---|---|
-| 74 | Filter cutoff | | 90 | Waveform mask (low nibble) |
-| 71 | Resonance | | 102 | Filter routing (bits = voices) |
-| 73 | Attack | | 103 | LFO destination |
-| 75 | Decay | | 106 | Filter mode |
-| 70 | Sustain | | 107 | Delay time |
-| 72 | Release | | 108 | Delay feedback |
-| 76 | LFO rate | | 109 | Delay mix |
-| 77 | LFO depth | | 110 | Chorus rate |
-| 79 | Glide | | 111 | Chorus depth |
-| 85 | Ring mod | | 112 | Chorus mix |
-| 86 | Hard sync | | 80 | Load preset (value = slot) |
-| 87 | Pulse width | | 120/123 | All sound / notes off |
-| 88 | Master volume | | 121 | Reset controllers |
-| 89 | SID model | | | |
+| 7 | **Voice mixer level** (per channel) | | 90 | Waveform mask (low nibble) |
+| 74 | Filter cutoff | | 102 | Filter routing (bits = voices) |
+| 71 | Resonance | | 103 | LFO destination |
+| 73 | Attack | | 106 | Filter mode |
+| 75 | Decay | | 107 | Delay time |
+| 70 | Sustain | | 108 | Delay feedback |
+| 72 | Release | | 109 | Delay mix |
+| 76 | LFO rate | | 110 | Chorus rate |
+| 77 | LFO depth | | 111 | Chorus depth |
+| 79 | Glide | | 112 | Chorus mix |
+| 85 | Ring mod | | 80 | Load preset (value = slot) |
+| 86 | Hard sync | | 120/123 | All sound / notes off |
+| 87 | Pulse width | | 121 | Reset controllers |
+| 88 | SID master volume | | 89 | SID model |
 
-CCs address **all voices**; per-voice timbre editing is an on-screen
-(or preset) affair. Performance CCs that MIDI files spam (mod wheel CC1,
-portamento CC5/84, GM effect sends 91/93) are deliberately unmapped so a
+**CC7 is per voice**: send it on a voice's own channel (base, base+1, base+2)
+to move that voice's V1/V2/V3 mixer fader -- the GM channel-volume convention.
+Every other CC addresses **all voices**; per-voice timbre editing is an
+on-screen (or preset) affair. Performance CCs that MIDI files spam (mod wheel
+CC1, portamento CC5/84, GM effect sends 91/93) are deliberately unmapped so a
 random MIDI file can't detune your patch.
+
+### Drum channel (10) control changes
+
+The whole MIX drum section and the realtime kit sculpt are addressable on
+channel 10 (lane order: KCK, SNR, HTC, HTO):
+
+| CC | Parameter |
+|---|---|
+| 7 | Drum kit master level |
+| 20-23 | Lane LEVEL |
+| 24-27 | Lane TUNE |
+| 28-31 | Lane DECAY |
+
+The on-screen mixer faders and DRM T/D readouts follow all of these live.
 
 ### Clock
 With **CLOCK IN** on, the transport follows external start/stop and tempo (at
@@ -417,24 +438,34 @@ the SYNC ratio). **CLOCK OUT** makes SID-DS the master.
 
 ---
 
-## 16. The demo song: "LOW RES"
+## 16. The demo songs
 
-The factory ROM boots with a complete bass-music arrangement (A minor,
-128 BPM) that exercises the whole machine. Study it, then wreck it:
+The plain ROM ships with an empty pattern bank. Two companion ROMs each carry
+a complete factory track that exercises the whole machine; press **START** to
+play one.
 
-- **P1** sub intro: T1 bass alone, T3 pad breathing in, baked filter sweep.
-- **P2** groove: wah bass (cutoff motion), T2 offbeat octave stabs.
-- **P3** acid line: slides + resonance locks, T3 drone underneath.
-- **P4** stomp: PWM hook on T2 (pulse-width motion).
-- **P5** build: contrary motion, bass walks down while the lead climbs.
-- **P6** the drop: all three voices, doubled walk, harmony thirds.
-- **P7** drum break: a tuned-kick tom run, ghost snares, breathing hats and
-  a two-stage snare roll, built **entirely from drum p-locks**.
-- The SONG chain arranges these across 14 slots with repeats and per-slot
-  mutes (drumless intro, synthless break), then wraps.
+### "GRAVE WVVE" (`sid-ds-1.0.1b-demo.nds`)
 
-Open SEQ/DRM while it plays and watch follow mode page through it; open FLT
-and watch the locks drive the filter.
+A slow, occult witch-house track (C minor, 66 BPM, a heavy half-time feel) on
+the lament descent (Cm, Bb, Ab, G). Deep sub bass on T1, a ghostly pulse lead
+on T2 that slides between every note for the woozy "screwed" glide, and
+cavernous triangle pads and bells on T3. Booming p-locked kicks, trap-style
+triplet hat rolls, a light chorus p-locked in for the detuned SID shimmer,
+and a drum-solo break of toms and clap rolls. The final slot's tempo override
+drags the whole song down to 56 BPM for the screwed ending.
+
+### "UNDERTOW" (`sid-ds-1.0.1b-dnb.nds`)
+
+A smooth liquid drum & bass roller (D minor, 174 BPM). A classic two-step
+break with ghost snares and shuffled hats, a rolling sub that slides into
+every chord change, a soulful pulse lead, and fast triangle arpeggios
+rippling through lush 7th chords (Dm7, Bbmaj7, Fmaj7, Cmaj7) under a chorus
+wash, with a ghost-fest drum break rolling back into the drop.
+
+Watch the top-screen WAVE row light up as each voice enters (saw cyan, pulse
+yellow, triangle green); open SEQ/DRM while one plays for follow mode, or FLT
+to watch the locks drive the filter. Study them, then wreck them: every
+pattern is fully editable.
 
 ---
 
@@ -451,7 +482,7 @@ and watch the locks drive the filter.
 | Sequencer | 16 patterns, 32 steps, 3 synth + 4 drum lanes |
 | Per step | Velocity, gate (25-100%), ratchet (1-4), probability (25-100%), slide, tie, accent (drums) |
 | Automation | 4 motion lanes per pattern; motion recording + parameter locks |
-| Song | 64 slots (pattern, x1-8 repeats, lane mutes), loop on/off |
+| Song | 64 slots (pattern, x1-8 repeats, lane mutes, per-slot tempo), loop on/off |
 | Mixer | SID master + 3 voice levels + drum master + 4 lane trims |
 | FX | Chorus + delay (post-mix) |
 | MIDI | 3-part multitimbral in + ch10 drums, clock in/out, CC map, THRU |
