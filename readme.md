@@ -1,7 +1,7 @@
 # SID-DS Owner's Manual
 
 **C64 SID synthesizer & groovebox for the Nintendo DS**
-Firmware v1.0.4B (beta), July 2026
+Firmware v1.0.5B (beta), July 2026
 
 ---
 
@@ -44,7 +44,7 @@ filter, and the 6581's famous distortion.
 
 | File | Contents |
 |---|---|
-| `sid-ds-1.0.4b.nds` | The firmware, **empty** pattern bank (start fresh) |
+| `sid-ds-1.0.5b.nds` | The firmware, **empty** pattern bank (start fresh) |
 
 ---
 
@@ -164,15 +164,21 @@ SID-DS is a **3-track mono-voice** machine, the classic SID tracker model:
 ### MOD: modulation
 - **RATE / DPTH:** the LFO (DPTH is also the mod wheel's target).
 - **DEST:** LFO destination: cutoff, pulse width, or pitch.
-- **GLID:** glide (portamento) time for SLIDE steps and the arp's legato. At
-  0 a SLIDE step changes pitch instantly (legato, no sweep); raise it and the
+- **GLID:** glide (portamento) time. It shapes SLIDE steps in the sequencer,
+  **dragging across the touch keys** (tap = retrigger, drag = legato glide),
+  and legato MIDI playing (press the new key before releasing the old). At 0
+  every legato move changes pitch instantly (no sweep); raise it and the
   pitch travels.
-- **ARP / ARPR:** the arpeggiator's mode and rate. ARP sweeps four zones
-  (up / down / up-down / random); ARPR four rates (1/8, 1/16, 1/16 triplet,
-  1/32). Engage the arp with the ARP button on the SEQ transport and hold
-  keys: it plays them on the **selected track** while the pattern keeps
-  running on the other tracks and the drums. Both are live params: they can
-  be motion-recorded, p-locked and driven by MIDI (CC104/105).
+- **ARP button + ARP / ARPR sliders:** the arpeggiator's home. Toggle it
+  with the **ARP button** below the sliders, then on the touch keyboard
+  **tap keys to latch them** into the chord (tap a lit key to remove it);
+  held MIDI keys feed it too. It plays the **selected track** while the
+  pattern keeps running on the other tracks and the drums. The ARP slider
+  sweeps four mode zones (up / down / up-down / random); ARPR four rates
+  (1/8, 1/16, 1/16 triplet, 1/32). Light **REC** while it runs and the arp
+  **prints into the pattern** (arp capture) -- turn REC and ARP off and the
+  printed line keeps playing. Both sliders are live params:
+  motion-recordable, p-lockable, MIDI CC104/105.
 
 ### OSC: oscillator (per voice)
 - **V1 V2 V3 tabs** select the voice.
@@ -211,11 +217,13 @@ motion lanes per pattern.
   - **TRK:** cycles TR1, TR2, TR3 (colour-coded); selects the track that
     the grid, keyboard and editor address.
 - **Transport row:** `PLAY, BPM (40-240), LEN (1-32 steps), SWG (swing),
-  ARP, REC, CLR`.
-  - **ARP:** hold keys on the piano strip and they arpeggiate on the selected
-    track -- while the pattern keeps playing on the other tracks and drums.
-    Mode and rate live on the MOD page (ARP / ARPR).
+  REC, CLR`.
+  - **BPM:** taps step by **1**; **hold** the `-`/`+` side and it
+    auto-repeats, accelerating the longer you hold (1s, then 2s, then 5s) --
+    tap for precision, hold to travel.
   - **CLR:** clears the selected track's note lane in this pattern.
+  - The **arpeggiator** lives on the MOD page (see chapter 6), where its
+    mode and rate sliders are.
 
 ### Entering notes
 - **REC off:** the keyboard just plays (jam along freely).
