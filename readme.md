@@ -1,7 +1,7 @@
 # SID-DS Owner's Manual
 
 **C64 SID synthesizer & groovebox for the Nintendo DS**
-Firmware v1.0.1B (beta), July 2026
+Firmware v1.0.4B (beta), July 2026
 
 ---
 
@@ -22,9 +22,8 @@ Firmware v1.0.1B (beta), July 2026
 13. [Saving & presets (SAVE)](#13-saving--presets-save)
 14. [Settings & MIDI (SET)](#14-settings--midi-set)
 15. [MIDI implementation](#15-midi-implementation)
-16. [The demo songs](#16-the-demo-songs)
-17. [Specifications](#17-specifications)
-18. [Troubleshooting](#18-troubleshooting)
+16. [Specifications](#16-specifications)
+17. [Troubleshooting](#17-troubleshooting)
 
 ---
 
@@ -45,7 +44,7 @@ filter, and the 6581's famous distortion.
 
 | File | Contents |
 |---|---|
-| `sid-ds-1.0.1b.nds` | The firmware, **empty** pattern bank (start fresh) |
+| `sid-ds-1.0.4b.nds` | The firmware, **empty** pattern bank (start fresh) |
 
 ---
 
@@ -165,9 +164,15 @@ SID-DS is a **3-track mono-voice** machine, the classic SID tracker model:
 ### MOD: modulation
 - **RATE / DPTH:** the LFO (DPTH is also the mod wheel's target).
 - **DEST:** LFO destination: cutoff, pulse width, or pitch.
-- **GLID:** glide (portamento) time for slides.
-- **ARP / ARPR:** reserved for chip-style arp modes (the playable arpeggiator
-  lives on the SEQ transport).
+- **GLID:** glide (portamento) time for SLIDE steps and the arp's legato. At
+  0 a SLIDE step changes pitch instantly (legato, no sweep); raise it and the
+  pitch travels.
+- **ARP / ARPR:** the arpeggiator's mode and rate. ARP sweeps four zones
+  (up / down / up-down / random); ARPR four rates (1/8, 1/16, 1/16 triplet,
+  1/32). Engage the arp with the ARP button on the SEQ transport and hold
+  keys: it plays them on the **selected track** while the pattern keeps
+  running on the other tracks and the drums. Both are live params: they can
+  be motion-recorded, p-locked and driven by MIDI (CC104/105).
 
 ### OSC: oscillator (per voice)
 - **V1 V2 V3 tabs** select the voice.
@@ -207,8 +212,9 @@ motion lanes per pattern.
     the grid, keyboard and editor address.
 - **Transport row:** `PLAY, BPM (40-240), LEN (1-32 steps), SWG (swing),
   ARP, REC, CLR`.
-  - **ARP:** hold keys on the piano strip and they arpeggiate at step rate on
-    the selected track.
+  - **ARP:** hold keys on the piano strip and they arpeggiate on the selected
+    track -- while the pattern keeps playing on the other tracks and drums.
+    Mode and rate live on the MOD page (ARP / ARPR).
   - **CLR:** clears the selected track's note lane in this pattern.
 
 ### Entering notes
@@ -273,12 +279,18 @@ Locks live in the same 4 motion lanes. When the pattern plays, each step
 re-applies its locked values; the on-screen controls (and the top-screen
 dashboard) ride the automation so you can *see* the sound move.
 
-**What can be motion-recorded / p-locked:** every live sound control:
-cutoff, resonance, envelope, LFO, pulse width, wave*, glide, FX sends, SID
-master volume, drum master, per-drum TUNE / DECAY / LEVEL.
+**What can be motion-recorded / p-locked:** every machine-level control:
+cutoff, resonance, filter mode and routing, LFO rate/depth/destination,
+glide, the mod wheel, all six FX controls, the SID master volume (SYN
+fader), the drum master, and per-drum TUNE / DECAY / LEVEL.
 
-> \* A wave lock changes **all three voices** (waveform motion is
-> voice-agnostic); per-voice timbres are the OSC/ENV V-tabs' job.
+**Per-voice controls never capture.** Anything behind a V1/V2/V3 tab (wave,
+pulse width, ring, sync, ADSR) and the V1/V2/V3 mixer faders are live tweaks
+only: automation lanes broadcast to the whole chip, so a per-voice edit must
+stay a per-voice edit. If you move one while recording would apply, the
+machine flashes **PER-VOICE: NO LOC** to show you the boundary. The classic
+way to "automate one voice" is routing: filter only the voice you want moved
+(FLT page), then lock the cutoff.
 
 ---
 
@@ -305,8 +317,7 @@ A **64-slot chain** (4 pages of 16) arranges patterns into a song.
 - **START** anywhere outside SEQ/DRM drives song transport.
 
 Song playback plays both lanes of each pattern (synth + drums) with all
-motion locks, per-slot mutes and repeats. The demo song is built entirely
-from these tools.
+motion locks, per-slot mutes, tempo overrides and repeats.
 
 ---
 
@@ -410,6 +421,7 @@ on, held notes on the selected track's channel feed the arp.
 | 86 | Hard sync | | 120/123 | All sound / notes off |
 | 87 | Pulse width | | 121 | Reset controllers |
 | 88 | SID master volume | | 89 | SID model |
+| 104 | Arp mode | | 105 | Arp rate |
 
 **CC7 is per voice**: send it on a voice's own channel (base, base+1, base+2)
 to move that voice's V1/V2/V3 mixer fader -- the GM channel-volume convention.
@@ -437,7 +449,6 @@ With **CLOCK IN** on, the transport follows external start/stop and tempo (at
 the SYNC ratio). **CLOCK OUT** makes SID-DS the master.
 
 ---
-
 
 ## 16. Specifications
 
