@@ -45,8 +45,7 @@ filter, and the 6581's famous distortion.
 
 | File | Contents |
 |---|---|
-| `sid-ds-1.0.1b.nds` | Full firmware **with** the built-in demo song |
-| `sid-ds-1.0.1b-clean.nds` | Identical firmware, **empty** pattern bank |
+| `sid-ds-1.0.1b.nds` | Identical firmware, **empty** pattern bank |
 
 ---
 
