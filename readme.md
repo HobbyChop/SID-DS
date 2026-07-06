@@ -1,7 +1,7 @@
 # SID-DS Owner's Manual
 
 **C64 SID synthesizer & groovebox for the Nintendo DS**
-Firmware v1.0.6B (beta), July 2026
+Firmware v1.0.8B (beta), July 2026
 
 ---
 
@@ -44,7 +44,7 @@ filter, and the 6581's famous distortion.
 
 | File | Contents |
 |---|---|
-| `sid-ds-1.0.6b.nds` | The firmware, **empty** pattern bank (start fresh) |
+| `sid-ds-1.0.8b.nds` | The firmware, **empty** pattern bank (start fresh) |
 
 ---
 
@@ -94,8 +94,12 @@ filter, and the 6581's famous distortion.
 | Button | Function |
 |---|---|
 | **START** | Transport: starts/stops the **song** from any page, except on the SEQ and DRM pages, where it starts/stops the **pattern** you're editing. |
+| **A** | Copy the current pattern to the clipboard (all tracks, drums, motion lanes). |
+| **B** | Paste the clipboard into the current pattern -- so **A on P1, switch to P2, B** duplicates a pattern. |
+| **D-pad** | Move the selected cell: the step cursor on SEQ/DRM (crossing bar A/B flips the page), the slot on SONG. |
 
-Everything else is stylus-driven.
+A top-screen hint line shows what these do on the current page. Everything
+else is stylus-driven.
 
 ---
 
