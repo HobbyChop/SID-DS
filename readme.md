@@ -438,38 +438,8 @@ the SYNC ratio). **CLOCK OUT** makes SID-DS the master.
 
 ---
 
-## 16. The demo songs
 
-The plain ROM ships with an empty pattern bank. Two companion ROMs each carry
-a complete factory track that exercises the whole machine; press **START** to
-play one.
-
-### "GRAVE WVVE" (`sid-ds-1.0.1b-demo.nds`)
-
-A slow, occult witch-house track (C minor, 66 BPM, a heavy half-time feel) on
-the lament descent (Cm, Bb, Ab, G). Deep sub bass on T1, a ghostly pulse lead
-on T2 that slides between every note for the woozy "screwed" glide, and
-cavernous triangle pads and bells on T3. Booming p-locked kicks, trap-style
-triplet hat rolls, a light chorus p-locked in for the detuned SID shimmer,
-and a drum-solo break of toms and clap rolls. The final slot's tempo override
-drags the whole song down to 56 BPM for the screwed ending.
-
-### "UNDERTOW" (`sid-ds-1.0.1b-dnb.nds`)
-
-A smooth liquid drum & bass roller (D minor, 174 BPM). A classic two-step
-break with ghost snares and shuffled hats, a rolling sub that slides into
-every chord change, a soulful pulse lead, and fast triangle arpeggios
-rippling through lush 7th chords (Dm7, Bbmaj7, Fmaj7, Cmaj7) under a chorus
-wash, with a ghost-fest drum break rolling back into the drop.
-
-Watch the top-screen WAVE row light up as each voice enters (saw cyan, pulse
-yellow, triangle green); open SEQ/DRM while one plays for follow mode, or FLT
-to watch the locks drive the filter. Study them, then wreck them: every
-pattern is fully editable.
-
----
-
-## 17. Specifications
+## 16. Specifications
 
 | | |
 |---|---|
@@ -491,7 +461,7 @@ pattern is fully editable.
 
 ---
 
-## 18. Troubleshooting
+## 17. Troubleshooting
 
 - **No sound?** Check the MIX faders and the SID master (SYN), and that the
   track you're playing isn't routed into a closed filter (FLT page, mode OFF
