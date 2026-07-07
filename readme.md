@@ -1,7 +1,7 @@
 # SID-DS Owner's Manual
 
 **C64 SID synthesizer & groovebox for the Nintendo DS**
-Firmware v1.0.8B (beta), July 2026
+Firmware v1.0.9B (beta), July 2026
 
 ---
 
@@ -44,7 +44,7 @@ filter, and the 6581's famous distortion.
 
 | File | Contents |
 |---|---|
-| `sid-ds-1.0.8b.nds` | The firmware, **empty** pattern bank (start fresh) |
+| `sid-ds-1.0.9b.nds` | The firmware, **empty** pattern bank (start fresh) |
 
 ---
 
@@ -269,6 +269,9 @@ Four TR-style lanes, 32 steps, per pattern:
     plays) and can be motion-recorded and p-locked.
 - Same transport as SEQ; **CLR** clears the drum lanes.
 - Per-drum **LEVEL** trims and the drum **master** live on the MIX page.
+- The whole kit's voicing is chosen on **SET** -- **DRUM KIT** cycles ELECTRO
+  / DIRT / RING / ZAP (four re-synthesised SID kits); per-lane TUNE/DECAY
+  sculpt on top of whichever kit is loaded.
 
 ---
 
@@ -405,7 +408,7 @@ octave.
 | **CLOCK IN** | Follow external MIDI clock & transport. |
 | **CLOCK OUT** | Send MIDI clock while playing. |
 | **SYNC** | External-clock ratio: HALF / 1:1 / DBL. |
-| **DRUM VOL** | Drum master (same as the MIX DRM fader). |
+| **DRUM KIT** | Cycles the drum kit for the four sequencer lanes: **ELECTRO** (the default 808/electro), **DIRT** (6581-overdriven), **RING** (ring-modulated metallic), **ZAP** (deep-sweep/laser). Each is a re-synthesised set of SID recipes. |
 | **SID MODEL** | **6581** (gritty, non-linear) / **8580** (clean). |
 
 MIDI I/O uses a slot-2 MIDI cartridge. `CART OK` in the header confirms
@@ -482,7 +485,7 @@ the SYNC ratio). **CLOCK OUT** makes SID-DS the master.
 | Modulators | Ring mod, hard sync, 1 LFO (cutoff/PW/pitch), glide |
 | Filter | 1 shared multimode (LP/HP/BP/NOTCH), per-voice routing, model-correct drive |
 | Envelopes | Per-voice ADSR using the SID's rate tables |
-| Drums | 4-lane SID-recipe kit, per-drum tune/decay/level |
+| Drums | 4-lane SID-recipe kit x4 selectable (ELECTRO/DIRT/RING/ZAP), per-drum tune/decay/level |
 | Sequencer | 16 patterns, 32 steps, 3 synth + 4 drum lanes |
 | Per step | Velocity, gate (25-100%), ratchet (1-4), probability (25-100%), slide, tie, accent (drums) |
 | Automation | 4 motion lanes per pattern; motion recording + parameter locks |
