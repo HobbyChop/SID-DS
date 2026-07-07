@@ -96,6 +96,8 @@ filter, and the 6581's famous distortion.
 | **START** | Transport: starts/stops the **song** from any page, except on the SEQ and DRM pages, where it starts/stops the **pattern** you're editing. |
 | **A** | Copy the current pattern to the clipboard (all tracks, drums, motion lanes). |
 | **B** | Paste the clipboard into the current pattern -- so **A on P1, switch to P2, B** duplicates a pattern. |
+| **X** | **Undo** the last destructive edit (CLR, paste, transpose, NEW) -- up to **8 levels** deep. |
+| **Y** | **Redo** (steps back up the undo stack). |
 | **D-pad** | Move the selected cell: the step cursor on SEQ/DRM (crossing bar A/B flips the page), the slot on SONG. |
 
 A top-screen hint line shows what these do on the current page. Everything
@@ -272,7 +274,12 @@ Four TR-style lanes, 32 steps, per pattern:
 
 ## 9. Recording: REC, LOC, motion & parameter locks
 
-The REC button is three-state: **OFF, REC, LOC**, then back to OFF.
+The REC button is three-state: **OFF, REC, LOC**, then back to OFF. Each tap
+flashes what the new mode does (`REC: LIVE + MOTION` / `LOC: LOCK THIS STEP`).
+
+> **Undo:** any destructive edit -- CLR, paste, transpose, NEW -- can be taken
+> back with the hardware **X** button, up to **8 levels** deep; **Y** redoes.
+> The banner shows how many undo levels remain (`UNDONE (3)`).
 
 ### Motion recording (REC, volca-style)
 While the pattern **plays** with REC lit, *move any sound control* (the
@@ -295,6 +302,10 @@ dashboard) ride the automation so you can *see* the sound move.
 cutoff, resonance, filter mode and routing, LFO rate/depth/destination,
 glide, the mod wheel, all six FX controls, the SID master volume (SYN
 fader), the drum master, and per-drum TUNE / DECAY / LEVEL.
+
+A pattern holds **4 motion lanes** (4 automated parameters). Reach for a fifth
+and the machine flashes **MOTION LANES FULL (4)** rather than silently
+ignoring it.
 
 **Per-voice controls never capture.** Anything behind a V1/V2/V3 tab (wave,
 pulse width, ring, sync, ADSR) and the V1/V2/V3 mixer faders are live tweaks
