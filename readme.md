@@ -1,7 +1,7 @@
 # SID-DS Owner's Manual
 
 **C64 SID synthesizer & groovebox for the Nintendo DS**
-Firmware v1.1.0B (beta), July 2026
+Firmware v1.2.1B (beta), July 2026
 
 ---
 
@@ -44,7 +44,7 @@ filter, and the 6581's famous distortion.
 
 | File | Contents |
 |---|---|
-| `sid-ds-1.1.0b.nds` | The firmware, **empty** pattern bank (start fresh) |
+| `sid-ds-1.2.1b.nds` | The firmware, **empty** pattern bank (start fresh) |
 
 ---
 
@@ -333,13 +333,20 @@ A **64-slot chain** (4 pages of 16) arranges patterns into a song.
   - `-P#+` direct pattern pick.
   - `-X#+` repeat count x1 to x8.
   - **S / D** per-slot lane mutes (e.g. drumless intro, synthless break).
-  - `-BPM+` **per-slot tempo**: taps step by 5 BPM (40-240). Shown in yellow
-    when set; stepping below 40 turns it off (the slot follows the base
-    tempo). A slot with an override wears a small yellow tick in the grid.
-    While that slot plays, the whole transport (and MIDI clock out) runs at
-    its tempo; the base BPM on the SEQ page is untouched.
+  - `-BPM+` **per-slot tempo override**: taps step by 5 BPM (40-240). When the
+    slot has no override this box shows the **song tempo dimmed** (for reference,
+    tapping it starts an override there); once set it turns **yellow** and the
+    slot wears a small yellow tick in the grid. Stepping below 40 clears the
+    override, and the slot goes back to following the song tempo. While an
+    overridden slot plays, the whole transport (and MIDI clock out) runs at its
+    tempo; the song tempo is untouched.
   - `-#/4+` chain page.
-- **Transport:** `PLAY`, **`LOOP`**, `CLR`.
+- **Transport:** `PLAY`, master **`TEMPO -nnn+`** (when stopped), **`LOOP`**, `CLR`.
+  - **TEMPO:** the master **song tempo** (40-240, taps by 1, hold to accelerate).
+    This is the same base BPM as the SEQ/DRM transport, surfaced here so you can
+    set the whole song's speed from the arranger. Every slot without an override
+    plays at it. Shown while the transport is stopped (the `NOW/NEXT` readout
+    takes the space during playback; the top screen shows the live BPM).
   - **LOOP lit:** the arrangement wraps forever.
   - **LOOP dim:** playback **stops by itself** after the last filled slot.
 - **Live readout:** `NOW P4 2/4, NEXT P6`: current pattern, pass count,
