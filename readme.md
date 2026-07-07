@@ -1,7 +1,7 @@
 # SID-DS Owner's Manual
 
 **C64 SID synthesizer & groovebox for the Nintendo DS**
-Firmware v1.0.9B (beta), July 2026
+Firmware v1.1.0B (beta), July 2026
 
 ---
 
@@ -44,7 +44,7 @@ filter, and the 6581's famous distortion.
 
 | File | Contents |
 |---|---|
-| `sid-ds-*.nds` | The firmware, **empty** pattern bank (start fresh) |
+| `sid-ds-1.1.0b.nds` | The firmware, **empty** pattern bank (start fresh) |
 
 ---
 
@@ -260,10 +260,14 @@ Four TR-style lanes, 32 steps, per pattern:
 | HTC | Closed hat (LFSR noise tick) | 42 |
 | HTO | Open hat (longer noise) | 46 |
 
-- **Tap a cell:** off, hit, **ACCENT**, off.
+- **Tap a cell:** off, **soft** (ghost), **hit**, **ACCENT**, off. The cell
+  draws the level as a rising bar (half / full / full with a bright cap), and
+  the level sets the hit's velocity: ghost hits sit back in the mix, accents
+  cut through. Sprinkle soft hats and snares for a groove that breathes.
 - **Lane label:** mutes the lane. **S:** solos it.
 - **Editor row** (for the selected cell/lane):
-  - **A:** accent toggle. **R:** ratchet `R:1` to `R:4`. **P:** probability.
+  - **A / B:** the step page (1-16 / 17-32), shared with SEQ. **R:** ratchet
+    `R:1` to `R:4`. **P:** probability.
   - **T / D:** the selected lane's drum **TUNE** and **DECAY**. Drag to
     sweep. These are live synthesis parameters (sculpt the kit while it
     plays) and can be motion-recorded and p-locked.
@@ -485,9 +489,9 @@ the SYNC ratio). **CLOCK OUT** makes SID-DS the master.
 | Modulators | Ring mod, hard sync, 1 LFO (cutoff/PW/pitch), glide |
 | Filter | 1 shared multimode (LP/HP/BP/NOTCH), per-voice routing, model-correct drive |
 | Envelopes | Per-voice ADSR using the SID's rate tables |
-| Drums | 4-lane SID-recipe kit x4 selectable (ELECTRO/DIRT/RING/ZAP), per-drum tune/decay/level |
+| Drums | 4-lane SID-recipe kit, 4 selectable (ELECTRO/DIRT/RING/ZAP), per-drum tune/decay/level |
 | Sequencer | 16 patterns, 32 steps, 3 synth + 4 drum lanes |
-| Per step | Velocity, gate (25-100%), ratchet (1-4), probability (25-100%), slide, tie, accent (drums) |
+| Per step | Velocity, gate (25-100%), ratchet (1-4), probability (25-100%), slide, tie; drums: soft/hit/accent velocity levels |
 | Automation | 4 motion lanes per pattern; motion recording + parameter locks |
 | Song | 64 slots (pattern, x1-8 repeats, lane mutes, per-slot tempo), loop on/off |
 | Mixer | SID master + 3 voice levels + drum master + 4 lane trims |
