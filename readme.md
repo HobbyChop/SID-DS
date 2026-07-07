@@ -262,8 +262,7 @@ Four TR-style lanes, 32 steps, per pattern:
 
 - **Tap a cell:** off, **soft** (ghost), **hit**, **ACCENT**, off. The cell
   draws the level as a rising bar (half / full / full with a bright cap), and
-  the level sets the hit's velocity: ghost hits sit back in the mix, accents
-  cut through. Sprinkle soft hats and snares for a groove that breathes.
+  the level sets the hit's velocity.
 - **Lane label:** mutes the lane. **S:** solos it.
 - **Editor row** (for the selected cell/lane):
   - **A / B:** the step page (1-16 / 17-32), shared with SEQ. **R:** ratchet
