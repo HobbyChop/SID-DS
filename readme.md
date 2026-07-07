@@ -44,7 +44,7 @@ filter, and the 6581's famous distortion.
 
 | File | Contents |
 |---|---|
-| `sid-ds-1.0.9b.nds` | The firmware, **empty** pattern bank (start fresh) |
+| `sid-ds-*.nds` | The firmware, **empty** pattern bank (start fresh) |
 
 ---
 
