@@ -440,9 +440,7 @@ on, held notes on the selected track's channel feed the arp.
 **CC7 is per voice**: send it on a voice's own channel (base, base+1, base+2)
 to move that voice's V1/V2/V3 mixer fader -- the GM channel-volume convention.
 Every other CC addresses **all voices**; per-voice timbre editing is an
-on-screen (or preset) affair. Performance CCs that MIDI files spam (mod wheel
-CC1, portamento CC5/84, GM effect sends 91/93) are deliberately unmapped so a
-random MIDI file can't detune your patch.
+on-screen (or preset) affair.
 
 ### Drum channel (10) control changes
 
